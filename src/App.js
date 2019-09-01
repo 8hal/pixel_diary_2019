@@ -1,37 +1,39 @@
 import React from 'react';
 
-function FoodLike(Food) {
-console.log(Food);
-  return <div>
-    <h1>I like {Food.name}</h1>
-    <img src={Food.image} alt = {Food.name}/>
-  </div>
-  
+
+class App extends React.Component{
+constructor(props){
+  super(props);
+  console.log("hello");
 }
 
-const FoodList = [
-    {
-      key : 1,
-      name : "kimchi",
-      image : "http://lorempixel.com/400/200/food/1/"
-    },
-    {
-      key : 2,
-      name : "udon",
-      image : "http://lorempixel.com/400/200/food/2/"
-    },
-    {
-      key : 3,
-      name : "sushi",
-      image : "http://lorempixel.com/400/200/food/3/"
+  state = {
+  count : 0,
+  bgColor : "orange"
+}
 
-    },
-  ]
+add = () => {
+  this.setState(current => ({bgColor : "pink"}));
+ };
+minus = () => {
+  this.setState(current => ({bgColor : "gray"}));
+};
+componentDidMount(){
+  console.log("component rendered");
+}
+componentDidUpdate(){
+  console.log("component updated");
+}
+  render(){
+    console.log("rendering");
+    
+return <div>
+<div style={{backgroundColor:this.state.bgColor}}>today</div>
+<button style={{backgroundColor: "pink"}} onClick = {this.add} >Happy</button>
+<button style={{backgroundColor: "gray"}} onClick = {this.minus} >Sad</button>
+</div>
 
-function App() {
-  return <div>
-    {FoodList.map(FoodLike)}
-    </div>;
+  }
 }
 
 export default App;
