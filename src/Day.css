@@ -1,0 +1,17 @@
+.happy{
+    width: 50px;
+    display: inline-block;
+    background-color: pink;
+}
+
+.sad{
+    width: 50px;
+    display: inline-block;
+    background-color: gray;
+}
+
+.neutral{
+    width: 50px;
+    display: inline-block;
+    background-color: wheat;
+}

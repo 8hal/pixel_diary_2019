@@ -1,40 +1,28 @@
 import React from 'react';
+import Calendar from './Calendar';
 
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("hello");
-  }
 
   state = {
-    count: 0,
-    bgColor: "orange"
+    emotion: "neutral"
   }
 
-  add = () => {
-    this.setState(current => ({ bgColor: "pink" }));
+  happy = () => {
+    this.setState(current => ({ emotion: "happy" }));
   };
 
-  minus = () => {
-    this.setState(current => ({ bgColor: "gray" }));
+  sad = () => {
+    this.setState(current => ({ emotion: "sad" }));
   };
 
-  componentDidMount() {
-    console.log("component rendered");
-  }
-
-  componentDidUpdate() {
-    console.log("component updated");
-  }
 
   render() {
-    console.log("rendering");
-
+    const { emotion } = this.state;
     return <div>
-      <div style={{ backgroundColor: this.state.bgColor }}>today</div>
-      <button style={{ backgroundColor: "pink" }} onClick={this.add} >Happy</button>
-      <button style={{ backgroundColor: "gray" }} onClick={this.minus} >Sad</button>
+      <Calendar dayEmotion = {emotion} />
+      <button style={{ backgroundColor: "pink" }} onClick={this.happy} >Happy</button>
+      <button style={{ backgroundColor: "gray" }} onClick={this.sad} >Sad</button>
     </div>
 
   }
