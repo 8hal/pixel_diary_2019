@@ -14,10 +14,10 @@ class Calendar extends React.Component {
   
 
   render(){
-  return <div>
+  return <div >
     <h1>Calendar</h1>
-    {this.props.userDays.map(day => {
-      return <Day dayEmotion={day.emotion} />
+    {this.props.userDays.map((day,index) => {
+      return <Day dayEmotion={day.emotion} handleSelectedDay={this.props.handleSelectedDay} dayIndex={index}/>
     }
     )
     }

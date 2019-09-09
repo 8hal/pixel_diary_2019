@@ -1,12 +1,35 @@
 .day{
     width: 14%;
     display: inline-block;
+    cursor:pointer;
 }
+
+.day:hover{
+    color: white;
+}
+
 .happy{
     background-color: pink;
 }
 
 .sad{
+    background-color: gray;
+}
+
+.angry{
+    background-color: red;
+}
+
+
+.disgust{
+    background-color: darkblue;
+}
+
+.fear{
+    background-color: darkviolet;
+}
+
+.surprise{
     background-color: gray;
 }
 

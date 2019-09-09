@@ -4,16 +4,21 @@ import classNames from 'classnames'
 
 
 class Day extends React.Component {
-  
-  test(){console.log("div selected")}
-
-    render() {
-      const dayClasses = classNames('day', this.props.dayEmotion);
-      return <div className = {dayClasses} onClick={() => this.test()}>
-          <h3> Day</h3>
-      </div>
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: this.props.dayIndex,
+      selected: false
     }
   }
-  
-  export default Day;
+
+  render() {
+    const dayClasses = classNames('day', this.props.dayEmotion);
+    return <div className={dayClasses} onClick={() => this.props.handleSelectedDay(this.state.index)}>
+      <h3> Day {this.state.index} </h3>
+    </div>
+
+  }
+}
+
+export default Day;
