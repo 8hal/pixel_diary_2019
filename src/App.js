@@ -1,10 +1,15 @@
 import React from 'react';
 import Calendar from './Calendar';
+import Daycard from './Daycard';
 
 const INITIAL_STATE = {
   selectedDay: 0,
-  changingEmotion: "",
-  days: [{ emotion: "neutral" }],
+  changingColor: "",
+  days: [
+    {
+     color : ""
+    }
+  ]
 };
 
 class App extends React.Component {
@@ -18,25 +23,25 @@ class App extends React.Component {
   onUpdateSelectedDay = () => {
     this.setState(prevState => {
       const prevSelectedDay = prevState.selectedDay;
-      const prevChangingEmotion = prevState.changingEmotion;
+      const prevChangingColor = prevState.changingColor;
       const days = prevState.days.map((day, j) => {
         if (j === prevState.selectedDay) {
-          return { emotion: prevState.changingEmotion };
+          return { color: prevState.changingColor };
         } else {
           return day;
         }
       });
       return {
         selectedDay: prevSelectedDay,
-        changingEmotion: prevChangingEmotion,
+        changingColor: prevChangingColor,
         days,
       };
     });
   };
 
-  onChangeChangingEmotion = event => {
-    this.setState({ changingEmotion: event.target.value });
-  };
+  handleChangingColor = (color) => {
+    this.setState({ changingColor: color });
+  }
 
   onChangeSelectedDay = event => {
     this.setState({ selectedDay: parseInt(event.target.value) });
@@ -44,12 +49,12 @@ class App extends React.Component {
 
   onAddItem = () => {
     this.setState(prevState => {
-      const days = prevState.days.concat({ emotion: "neutral" });
+      const days = prevState.days.concat({ color: "" });
       const prevSelectedDay = prevState.selectedDay;
-      const prevChangingEmotion = prevState.changingEmotion;
+      const prevChangingColor = prevState.changingColor;
       return {
         selectedDay: prevSelectedDay,
-        changingEmotion: prevChangingEmotion,
+        changingColor: prevChangingColor,
         days,
       };
     });
@@ -57,7 +62,7 @@ class App extends React.Component {
 
   render() {
     const { days } = this.state;
-    console.log(days);
+    console.log(this.state);
     return <div>
       <button
         type="button"
@@ -65,16 +70,11 @@ class App extends React.Component {
       >Add a day</button>
       <Calendar userDays={days} handleSelectedDay={this.handleSelectedDay} />
       <br />
-      
-      <label>Input your Day {this.state.selectedDay} Emotion:<input
-        type="text"
-        value={this.state.changingEmotion}
-        onChange={this.onChangeChangingEmotion}
-      /></label>
       <button
         type="button"
         onClick={this.onUpdateSelectedDay}
       >Update</button>
+      <Daycard handleChangingColor={this.handleChangingColor}/>
     </div>
 
   }
