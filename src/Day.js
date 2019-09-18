@@ -32,7 +32,7 @@ class Day extends React.Component {
       },
     });
     const dayClasses = classNames('day');
-    return <div style = {this.state.index == this.props.daySelectedDay ? styles.seletedColor : styles.color  } className={dayClasses} onClick={this.handleOnClick}>
+    return <div style = {this.state.index === this.props.daySelectedDay ? styles.seletedColor : styles.color  } className={dayClasses} onClick={this.handleOnClick}>
       <h4> {this.state.index}</h4>
     </div>
 

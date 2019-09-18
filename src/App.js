@@ -5,27 +5,35 @@ import Daycard from './Daycard';
 const INITIAL_STATE = {
   selectedDay: 0,
   changingColor: "#f17013",
+  changingTag: "",
   days: [
     {
-     color : ""
+     color : "",
+     tag : ""
     },
     {
-      color : ""
+      color : "",
+      tag : ""
      },
      {
-      color : ""
+      color : "",
+      tag : ""
      },
      {
-      color : ""
+      color : "",
+      tag : ""
      },
      {
-      color : ""
+      color : "",
+      tag : ""
      },
      {
-      color : ""
+      color : "",
+      tag : ""
      },
      {
-      color : ""
+      color : "",
+      tag : ""
      },
   ]
 };
@@ -40,14 +48,16 @@ class App extends React.Component {
 
   onUpdateSelectedDay = () => {
     this.setState(prevState => {
+      const nextDay = prevState.selectedDay + 1 ;
       const days = prevState.days.map((day, j) => {
         if (j === prevState.selectedDay) {
-          return { color: prevState.changingColor };
+          return { color: prevState.changingColor, tag: prevState.changingTag };
         } else {
           return day;
         }
       });
       return {
+        selectedDay : nextDay,
         days,
       };
     });
@@ -57,13 +67,17 @@ class App extends React.Component {
     this.setState({ changingColor: color });
   };
 
+  handleChangingTag = (tag) => {
+    this.setState({ changingTag: tag });
+  };
+
   onChangeSelectedDay = event => {
     this.setState({ selectedDay: parseInt(event.target.value) });
   };
 
   onAddItem = () => {
     this.setState(prevState => {
-      const days = prevState.days.concat({ color: "" });
+      const days = prevState.days.concat({ color: "", tag: "" });
       return {
         days,
       };
@@ -80,12 +94,8 @@ class App extends React.Component {
       >Add a day</button>
       <Calendar userSelectedDay = {selectedDay} userDays={days} handleSelectedDay={this.handleSelectedDay} />
       <br />
-      <Daycard handleChangingColor={this.handleChangingColor}>
+      <Daycard handleChangingColor={this.handleChangingColor} handleChangingTag={this.handleChangingTag} handleUpdate = {this.onUpdateSelectedDay}>
       </Daycard>
-      <button
-        type="button"
-        onClick={this.onUpdateSelectedDay}
-      >Update</button>
     </div>
 
   }
