@@ -24,12 +24,16 @@ class Day extends React.Component {
       'default': {
         color: {
           background: this.props.dayColor,
+        },
+        seletedColor: {
+          background: this.props.dayColor,
+          border: '1px solid black'
         }
       },
     });
     const dayClasses = classNames('day');
-    return <div style = {styles.color} className={dayClasses} onClick={this.handleOnClick}>
-      <h4> {this.state.index} </h4>
+    return <div style = {this.state.index == this.props.daySelectedDay ? styles.seletedColor : styles.color  } className={dayClasses} onClick={this.handleOnClick}>
+      <h4> {this.state.index}</h4>
     </div>
 
   }

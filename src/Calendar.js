@@ -18,7 +18,7 @@ class Calendar extends React.Component {
   return <div >
     <h1>Calendar</h1>
     {this.props.userDays.map((day,index) => {
-      return <Day dayColor={day.color} handleSelectedDay={this.props.handleSelectedDay} dayIndex={index}/>
+      return <Day daySelectedDay={this.props.userSelectedDay} dayColor={day.color} handleSelectedDay={this.props.handleSelectedDay} dayIndex={index}/>
     }
     )
     }

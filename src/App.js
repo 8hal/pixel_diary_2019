@@ -71,20 +71,21 @@ class App extends React.Component {
   };
 
   render() {
-    const { days } = this.state;
+    const { days,selectedDay } = this.state;
     console.log(this.state);
     return <div>
       <button
         type="button"
         onClick={this.onAddItem}
       >Add a day</button>
-      <Calendar userDays={days} handleSelectedDay={this.handleSelectedDay} />
+      <Calendar userSelectedDay = {selectedDay} userDays={days} handleSelectedDay={this.handleSelectedDay} />
       <br />
-      {this.state.selectedDay}<button
+      <Daycard handleChangingColor={this.handleChangingColor}>
+      </Daycard>
+      <button
         type="button"
         onClick={this.onUpdateSelectedDay}
       >Update</button>
-      <Daycard handleChangingColor={this.handleChangingColor}/>
     </div>
 
   }
