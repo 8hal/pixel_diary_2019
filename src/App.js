@@ -4,11 +4,29 @@ import Daycard from './Daycard';
 
 const INITIAL_STATE = {
   selectedDay: 0,
-  changingColor: "",
+  changingColor: "#f17013",
   days: [
     {
      color : ""
-    }
+    },
+    {
+      color : ""
+     },
+     {
+      color : ""
+     },
+     {
+      color : ""
+     },
+     {
+      color : ""
+     },
+     {
+      color : ""
+     },
+     {
+      color : ""
+     },
   ]
 };
 
@@ -22,8 +40,6 @@ class App extends React.Component {
 
   onUpdateSelectedDay = () => {
     this.setState(prevState => {
-      const prevSelectedDay = prevState.selectedDay;
-      const prevChangingColor = prevState.changingColor;
       const days = prevState.days.map((day, j) => {
         if (j === prevState.selectedDay) {
           return { color: prevState.changingColor };
@@ -32,8 +48,6 @@ class App extends React.Component {
         }
       });
       return {
-        selectedDay: prevSelectedDay,
-        changingColor: prevChangingColor,
         days,
       };
     });
@@ -41,7 +55,7 @@ class App extends React.Component {
 
   handleChangingColor = (color) => {
     this.setState({ changingColor: color });
-  }
+  };
 
   onChangeSelectedDay = event => {
     this.setState({ selectedDay: parseInt(event.target.value) });
@@ -50,11 +64,7 @@ class App extends React.Component {
   onAddItem = () => {
     this.setState(prevState => {
       const days = prevState.days.concat({ color: "" });
-      const prevSelectedDay = prevState.selectedDay;
-      const prevChangingColor = prevState.changingColor;
       return {
-        selectedDay: prevSelectedDay,
-        changingColor: prevChangingColor,
         days,
       };
     });
@@ -70,7 +80,7 @@ class App extends React.Component {
       >Add a day</button>
       <Calendar userDays={days} handleSelectedDay={this.handleSelectedDay} />
       <br />
-      <button
+      {this.state.selectedDay}<button
         type="button"
         onClick={this.onUpdateSelectedDay}
       >Update</button>

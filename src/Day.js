@@ -14,8 +14,12 @@ class Day extends React.Component {
     }
   }
 
+  handleOnClick = () => {
+    console.log(this.props);
+    this.props.handleSelectedDay(this.state.index);
+  }
+
   render() {
-    console.log(this.props.dayColor);
     const styles = reactCSS({
       'default': {
         color: {
@@ -24,8 +28,8 @@ class Day extends React.Component {
       },
     });
     const dayClasses = classNames('day');
-    return <div style = {styles.color} className={dayClasses} onClick={() => this.props.handleSelectedDay(this.state.index)}>
-      <h3> Day {this.state.index} </h3>
+    return <div style = {styles.color} className={dayClasses} onClick={this.handleOnClick}>
+      <h4> {this.state.index} </h4>
     </div>
 
   }
