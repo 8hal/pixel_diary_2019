@@ -13,8 +13,6 @@ class Calendar extends React.Component {
 
 
   render() {
-    console.log("this.props.userDays:")
-    console.log(this.props.userDays)
     return <div >
       <h1>Calendar</h1>
       {this.props.userDays.map((day, index) => {

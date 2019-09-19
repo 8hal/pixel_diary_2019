@@ -4,35 +4,33 @@ import Daycard from './Daycard';
 
 const INITIAL_STATE = {
   selectedDay: 0,
-  dayColor:"",
-  dayTag:"",
   days: [
     {
-      color: "",
+      color: "#aef113",
       tag: ""
     },
     {
-      color: "",
+      color: "#aef113",
       tag: ""
     },
     {
-      color: "",
+      color: "#aef113",
       tag: ""
     },
     {
-      color: "",
+      color: "#aef113",
       tag: ""
     },
     {
-      color: "",
+      color: "#aef113",
       tag: ""
     },
     {
-      color: "",
+      color: "#aef113",
       tag: ""
     },
     {
-      color: "",
+      color: "#aef113",
       tag: ""
     },
   ]
@@ -46,17 +44,14 @@ class App extends React.Component {
   }
 
   handleSelectedDay = (index) => { 
+    this.daycardElement.current.daycardDayOutput(this.state.days[index].color,this.state.days[index].tag);
     this.setState({ 
-      selectedDay: index, 
-      dayColor: this.state.days[index].color, 
-      dayTag: this.state.days[index].tag, 
+      selectedDay: index
     });
-    this.daycardElement.current.daycardDayOutput();
  }
 
   onUpdateSelectedDay = (changingColor,changingTag) => {
     this.setState(prevState => {
-      const nextDay = prevState.selectedDay + 1;
       const days = prevState.days.map((day, j) => {
         if (j === prevState.selectedDay) {
           return { color: changingColor, tag: changingTag };
@@ -65,10 +60,10 @@ class App extends React.Component {
         }
       });
       return {
-        selectedDay: nextDay,
         days,
       };
     });
+    this.handleSelectedDay(this.state.selectedDay + 1);
   };
 
   onChangeSelectedDay = event => {
@@ -77,7 +72,7 @@ class App extends React.Component {
 
   onAddItem = () => {
     this.setState(prevState => {
-      const days = prevState.days.concat({ color: "", tag: "" });
+      const days = prevState.days.concat({ color: "#aef113", tag: "" });
       return {
         days,
       };

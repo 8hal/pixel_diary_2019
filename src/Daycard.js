@@ -3,13 +3,7 @@ import reactCSS from 'reactcss'
 import { SliderPicker } from 'react-color';
 
 const INITIAL_STATE = {
-    color: {
-        r: '241',
-        g: '112',
-        b: '19',
-        a: '1',
-    },
-    hexColor:"",
+    hexColor:"#aef113",
     tag: ""
 }
 
@@ -19,13 +13,12 @@ class Daycard extends React.Component {
         this.state = INITIAL_STATE
     }
 
-    daycardDayOutput = () => {
-        this.setState({tag : this.props.daycardDayTag, dayHexColor: this.props.daycardDayColor})
+    daycardDayOutput = (color,ptag) => {
+        this.setState({tag : ptag, hexColor: color})
     }
 
     daycardHandleUpdate = () => {
         this.props.handleUpdate(this.state.hexColor,this.state.tag);
-        this.setState(INITIAL_STATE);
     };
 
     onChangeTag = (event) => {
@@ -33,27 +26,17 @@ class Daycard extends React.Component {
     }
 
     handleChange = (color) => {
-        this.setState({ color: color.rgb })
-    };
-
-    handleChangeComplete = (color, event) => {
-        this.setState({hexColor:color.hex});
+        this.setState({ hexColor: color.hex })
     };
 
     render() {
         const styles = reactCSS({
             'default': {
-                dayColor: {
+                card: {
                     width: '100%',
                     height: '200px',
                     borderRadius: '10px',
-                    background: this.props.daycardDayColor,
-                },
-                color: {
-                    width: '100%',
-                    height: '200px',
-                    borderRadius: '10px',
-                    background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
+                    background: this.state.hexColor
                 },
                 center: {
                     margin: 'auto',
@@ -71,7 +54,7 @@ class Daycard extends React.Component {
         });
 
         return <div>
-            <div style={styles.color}>
+            <div style={styles.card}>
                 <div style={styles.center}>
                     <label>Input Tag
                     <br/>
@@ -85,8 +68,8 @@ class Daycard extends React.Component {
                         onClick={this.daycardHandleUpdate}
                     >Update</button>
                 </div>
+                <SliderPicker color={this.state.hexColor} onChange={this.handleChange} />
             </div>
-            <SliderPicker color={this.state.color} onChange={this.handleChange} onChangeComplete={this.handleChangeComplete} />
         </div>
 
     }
