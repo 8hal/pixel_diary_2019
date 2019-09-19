@@ -9,6 +9,7 @@ const INITIAL_STATE = {
         b: '19',
         a: '1',
     },
+    hexColor:"",
     tag: ""
 }
 
@@ -17,14 +18,17 @@ class Daycard extends React.Component {
         super(props);
         this.state = INITIAL_STATE
     }
+
+    daycardDayOutput = () => {
+        this.setState({tag : this.props.daycardDayTag, dayHexColor: this.props.daycardDayColor})
+    }
+
     daycardHandleUpdate = () => {
-        this.props.handleUpdate();
+        this.props.handleUpdate(this.state.hexColor,this.state.tag);
         this.setState(INITIAL_STATE);
-        console.log(this.state);
     };
 
     onChangeTag = (event) => {
-        this.props.handleChangingTag(event.target.value);
         this.setState({ tag: event.target.value });
     }
 
@@ -33,12 +37,18 @@ class Daycard extends React.Component {
     };
 
     handleChangeComplete = (color, event) => {
-        this.props.handleChangingColor(color.hex);
+        this.setState({hexColor:color.hex});
     };
 
     render() {
         const styles = reactCSS({
             'default': {
+                dayColor: {
+                    width: '100%',
+                    height: '200px',
+                    borderRadius: '10px',
+                    background: this.props.daycardDayColor,
+                },
                 color: {
                     width: '100%',
                     height: '200px',

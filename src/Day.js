@@ -15,7 +15,6 @@ class Day extends React.Component {
   }
 
   handleOnClick = () => {
-    console.log(this.props);
     this.props.handleSelectedDay(this.state.index);
   }
 

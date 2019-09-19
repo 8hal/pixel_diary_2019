@@ -4,37 +4,37 @@ import Daycard from './Daycard';
 
 const INITIAL_STATE = {
   selectedDay: 0,
-  changingColor: "#f17013",
-  changingTag: "",
+  dayColor:"",
+  dayTag:"",
   days: [
     {
-     color : "",
-     tag : ""
+      color: "",
+      tag: ""
     },
     {
-      color : "",
-      tag : ""
-     },
-     {
-      color : "",
-      tag : ""
-     },
-     {
-      color : "",
-      tag : ""
-     },
-     {
-      color : "",
-      tag : ""
-     },
-     {
-      color : "",
-      tag : ""
-     },
-     {
-      color : "",
-      tag : ""
-     },
+      color: "",
+      tag: ""
+    },
+    {
+      color: "",
+      tag: ""
+    },
+    {
+      color: "",
+      tag: ""
+    },
+    {
+      color: "",
+      tag: ""
+    },
+    {
+      color: "",
+      tag: ""
+    },
+    {
+      color: "",
+      tag: ""
+    },
   ]
 };
 
@@ -42,33 +42,33 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+    this.daycardElement = React.createRef();
   }
 
-  handleSelectedDay = (index) => { this.setState({ selectedDay: index }) }
+  handleSelectedDay = (index) => { 
+    this.setState({ 
+      selectedDay: index, 
+      dayColor: this.state.days[index].color, 
+      dayTag: this.state.days[index].tag, 
+    });
+    this.daycardElement.current.daycardDayOutput();
+ }
 
-  onUpdateSelectedDay = () => {
+  onUpdateSelectedDay = (changingColor,changingTag) => {
     this.setState(prevState => {
-      const nextDay = prevState.selectedDay + 1 ;
+      const nextDay = prevState.selectedDay + 1;
       const days = prevState.days.map((day, j) => {
         if (j === prevState.selectedDay) {
-          return { color: prevState.changingColor, tag: prevState.changingTag };
+          return { color: changingColor, tag: changingTag };
         } else {
           return day;
         }
       });
       return {
-        selectedDay : nextDay,
+        selectedDay: nextDay,
         days,
       };
     });
-  };
-
-  handleChangingColor = (color) => {
-    this.setState({ changingColor: color });
-  };
-
-  handleChangingTag = (tag) => {
-    this.setState({ changingTag: tag });
   };
 
   onChangeSelectedDay = event => {
@@ -85,16 +85,22 @@ class App extends React.Component {
   };
 
   render() {
-    const { days,selectedDay } = this.state;
+    const { days, selectedDay } = this.state;
+    console.log("App state:");
     console.log(this.state);
     return <div>
       <button
         type="button"
         onClick={this.onAddItem}
       >Add a day</button>
-      <Calendar userSelectedDay = {selectedDay} userDays={days} handleSelectedDay={this.handleSelectedDay} />
+      <Calendar userSelectedDay={selectedDay} userDays={days} handleSelectedDay={this.handleSelectedDay} />
       <br />
-      <Daycard handleChangingColor={this.handleChangingColor} handleChangingTag={this.handleChangingTag} handleUpdate = {this.onUpdateSelectedDay}>
+      <Daycard 
+      ref = {this.daycardElement}
+      handleUpdate={this.onUpdateSelectedDay}
+      daycardDayColor={this.state.dayColor}
+      daycardDayTag={this.state.dayTag}
+      >
       </Daycard>
     </div>
 
