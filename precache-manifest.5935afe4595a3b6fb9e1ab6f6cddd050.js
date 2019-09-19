@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "56c16cb86292ba9220a9e19485875191",
+    "revision": "5de9e006c82d46e0f7b81585a70e1502",
     "url": "/pixel_diary_2019/index.html"
   },
   {
-    "revision": "8bb141dce052d448b676",
+    "revision": "237cf7c20f8d1042b00e",
     "url": "/pixel_diary_2019/static/css/main.9d793ca5.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pixel_diary_2019/static/js/2.b6ba0b50.chunk.js"
   },
   {
-    "revision": "8bb141dce052d448b676",
-    "url": "/pixel_diary_2019/static/js/main.7af3a0f5.chunk.js"
+    "revision": "237cf7c20f8d1042b00e",
+    "url": "/pixel_diary_2019/static/js/main.1ccac05d.chunk.js"
   },
   {
     "revision": "3f284794c7d075a9ebf3",
