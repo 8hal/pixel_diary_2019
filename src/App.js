@@ -39,18 +39,24 @@ const INITIAL_STATE = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = INITIAL_STATE;
+    const userState = localStorage.getItem("userState");
+    if (userState) {
+      this.state = JSON.parse(userState)
+    }
+    else {
+      this.state = INITIAL_STATE;
+    }
     this.daycardElement = React.createRef();
   }
 
-  handleSelectedDay = (index) => { 
-    this.daycardElement.current.daycardDayOutput(this.state.days[index].color,this.state.days[index].tag);
-    this.setState({ 
+  handleSelectedDay = (index) => {
+    this.daycardElement.current.daycardDayOutput(this.state.days[index].color, this.state.days[index].tag);
+    this.setState({
       selectedDay: index
     });
- }
+  }
 
-  onUpdateSelectedDay = (changingColor,changingTag) => {
+  onUpdateSelectedDay = (changingColor, changingTag) => {
     this.setState(prevState => {
       const days = prevState.days.map((day, j) => {
         if (j === prevState.selectedDay) {
@@ -62,8 +68,13 @@ class App extends React.Component {
       return {
         days,
       };
-    });
+    },
+      () => {
+        localStorage.setItem("userState",JSON.stringify(this.state))
+      }
+    );
     this.handleSelectedDay(this.state.selectedDay + 1);
+
   };
 
   onChangeSelectedDay = event => {
@@ -79,22 +90,28 @@ class App extends React.Component {
     });
   };
 
+  onClear = () => {
+    localStorage.removeItem("userState");
+    this.setState(INITIAL_STATE);
+  }
   render() {
     const { days, selectedDay } = this.state;
     console.log("App state:");
     console.log(this.state);
     return <div>
-      <button
-        type="button"
-        onClick={this.onAddItem}
-      >Add a day</button>
+      <button type="button" onClick={this.onAddItem}>
+        Add a day
+      </button>
+      <button type="button" onClick={this.onClear}>
+        Clear
+      </button>
       <Calendar userSelectedDay={selectedDay} userDays={days} handleSelectedDay={this.handleSelectedDay} />
       <br />
-      <Daycard 
-      ref = {this.daycardElement}
-      handleUpdate={this.onUpdateSelectedDay}
-      daycardDayColor={this.state.dayColor}
-      daycardDayTag={this.state.dayTag}
+      <Daycard
+        ref={this.daycardElement}
+        handleUpdate={this.onUpdateSelectedDay}
+        daycardDayColor={this.state.dayColor}
+        daycardDayTag={this.state.dayTag}
       >
       </Daycard>
     </div>
